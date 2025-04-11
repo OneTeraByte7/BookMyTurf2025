@@ -48,31 +48,31 @@ const UserDashboard = () => {
 
           <nav className="space-y-3 text-[15px]">
             <NavLink
-              to="book-turf"
+              to="/user-book-turf"
               className="flex items-center gap-3 text-white hover:text-green-300 transition"
             >
               <CalendarCheck size={20} /> Book Turf
             </NavLink>
             <NavLink
-              to="payment"
+              to="/user-payment"
               className="flex items-center gap-3 text-white hover:text-green-300 transition"
             >
               <Wallet size={20} /> Payment
             </NavLink>
             <NavLink
-              to="booking"
+              to="/user-booking"
               className="flex items-center gap-3 text-white hover:text-green-300 transition"
             >
               <ShoppingBag size={20} /> Booking
             </NavLink>
             <NavLink
-              to="event"
+              to="/user-event"
               className="flex items-center gap-3 text-white hover:text-green-300 transition"
             >
               <Calendar size={20} /> Event
             </NavLink>
             <NavLink
-              to="ai-bot"
+              to="/user-ai-bot"
               className="flex items-center gap-3 text-white hover:text-green-300 transition"
             >
               <Bot size={20} /> AI Bot
