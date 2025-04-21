@@ -7,10 +7,15 @@ import LandingPage from "./pages/LandingPage";
 import UserDashboard from "./pages/UserDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 
-// Components
+// User Components
+import BookTurf from "./components/BookTurf";
+import Payment from "./components/Payment";
+import EventManager from "./components/EventManager";
+import AIBot from "./components/AIBot";
+
+// Admin Components
 import AdminProfile from "./components/AdminProfile";
 import MyTurf from "./components/MyTurf";
-import BookTurf from "./components/BookTurf";
 
 function App() {
   return (
@@ -23,16 +28,21 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
 
-        {/* User Routes */}
+        {/* User Dashboard & Routes */}
         <Route path="/user-dashboard" element={<UserDashboard />} />
         <Route path="/user-book-turf" element={<BookTurf />} />
+        <Route path="/user-payment" element={<Payment />} />
+        <Route path="/user-events" element={<EventManager />} />
+        <Route path="/user-ai-bot" element={<AIBot />} />
 
-        {/* Admin Routes */}
+        {/* Admin Dashboard & Routes */}
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/admin-profile" element={<AdminProfile />} />
         <Route path="/admin-myturf" element={<MyTurf />} />
+        <Route path="/admin-ai-bot" element={<AIBot />} />
+        
 
-        {/* Fallback */}
+        {/* Fallback Route */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>

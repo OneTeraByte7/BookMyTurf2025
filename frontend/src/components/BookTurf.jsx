@@ -4,6 +4,7 @@ import axios from "axios";
 const BookTurf = () => {
   const [turfs, setTurfs] = useState([]);
   const [bookingData, setBookingData] = useState({});
+  const [bookedTurfs, setBookedTurfs] = useState(new Set()); // Track booked turfs
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/turfs")
@@ -21,39 +22,23 @@ const BookTurf = () => {
     }));
   };
 
-  const handleBookNow = (turfId) => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      alert("You must be logged in to book a turf.");
-      return;
-    }
-  
-    const booking = bookingData[turfId];
-    if (!booking || !booking.date || !booking.timeSlot) {
-      alert("Please select a date and time slot to book.");
-      return;
-    }
-  
-    const payload = {
-      turfId,
-      date: booking.date,
-      timeSlot: booking.timeSlot,
-    };
-  
-    axios.post("http://localhost:5000/api/bookings", payload, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then(() => {
-        alert("Booking submitted successfully!");
-      })
-      .catch((err) => {
-        console.error("Booking error:", err);
-        alert("Failed to book. Try again.");
+  const handleBookNow = async (turfId) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/bookings', {
+        turfId: turfId,
+        date: bookingData[turfId]?.date,
+        timeSlot: bookingData[turfId]?.timeSlot,
       });
+
+      // Handle the response and mark the turf as booked
+      console.log("Booking successful:", response.data);
+
+      // Update the booked turfs state to prevent further booking
+      setBookedTurfs((prev) => new Set(prev.add(turfId)));
+    } catch (error) {
+      console.error("Booking error:", error);
+    }
   };
-  
 
   const timeSlots = [
     "6:00 AM - 7:00 AM",
@@ -89,6 +74,7 @@ const BookTurf = () => {
                 onChange={(e) =>
                   handleBookingChange(turf._id, "date", e.target.value)
                 }
+                disabled={bookedTurfs.has(turf._id)} // Disable if already booked
               />
 
               <label className="block text-sm mt-2 text-gray-200">Select Time Slot:</label>
@@ -98,6 +84,7 @@ const BookTurf = () => {
                 onChange={(e) =>
                   handleBookingChange(turf._id, "timeSlot", e.target.value)
                 }
+                disabled={bookedTurfs.has(turf._id)} // Disable if already booked
               >
                 <option value="">-- Select Time Slot --</option>
                 {timeSlots.map((slot) => (
@@ -109,10 +96,15 @@ const BookTurf = () => {
 
               <button
                 onClick={() => handleBookNow(turf._id)}
-                className="w-full mt-4 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded"
+                className={`w-full mt-4 ${bookedTurfs.has(turf._id) ? 'bg-gray-500 cursor-not-allowed' : 'bg-green-500 hover:bg-green-600'} text-white py-2 px-4 rounded`}
+                disabled={bookedTurfs.has(turf._id)} // Disable if already booked
               >
-                Book Now
+                {bookedTurfs.has(turf._id) ? "Turf Booked" : "Book Now"}
               </button>
+
+              {bookedTurfs.has(turf._id) && (
+                <p className="mt-2 text-sm text-green-300">This turf is already booked.</p>
+              )}
             </div>
           </div>
         ))}

@@ -41,10 +41,14 @@ const UserDashboard = () => {
   return (
     <div className="flex h-screen bg-black text-white">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#0f3813] p-6 shadow-md flex flex-col justify-between">
+      <aside className="w-64 bg-[#0f3813] p-6 shadow-xl flex flex-col justify-between">
         <div>
-          <h2 className="text-2xl font-bold mb-6 text-green-400">User Panel</h2>
-          <p className="text-white mb-4 font-semibold">👋 Welcome, {userName}</p>
+          <h2 className="text-2xl font-bold mb-6 text-green-400 animate-pulse">
+            User Panel
+          </h2>
+          <p className="text-white mb-4 font-semibold">
+            👋 Welcome, {userName}
+          </p>
 
           <nav className="space-y-3 text-[15px]">
             <NavLink
@@ -63,19 +67,19 @@ const UserDashboard = () => {
               to="/user-booking"
               className="flex items-center gap-3 text-white hover:text-green-300 transition"
             >
-              <ShoppingBag size={20} /> Booking
+              <ShoppingBag size={20} /> Past Bookings
             </NavLink>
             <NavLink
               to="/user-event"
               className="flex items-center gap-3 text-white hover:text-green-300 transition"
             >
-              <Calendar size={20} /> Event
+              <Calendar size={20} /> Events
             </NavLink>
             <NavLink
               to="/user-ai-bot"
               className="flex items-center gap-3 text-white hover:text-green-300 transition"
             >
-              <Bot size={20} /> AI Bot
+              <Bot size={20} /> AI ChatBot
             </NavLink>
           </nav>
         </div>
@@ -98,8 +102,8 @@ const UserDashboard = () => {
 
       {/* Main Content */}
       <main className="flex-1 p-10 flex items-center justify-center">
-        <h1 className="text-4xl font-bold text-green-400">
-          Welcome, {userName}!
+        <h1 className="text-4xl font-bold text-green-400 animate-fade-in">
+          Welcome to BookMyTurf, {userName}!
         </h1>
       </main>
     </div>

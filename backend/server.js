@@ -18,13 +18,16 @@ const bookingRoutes = require("./routes/bookingRoutes");
 app.use(express.json());
 app.use(cors());
 
+// Authentication Middleware
+const authenticateUser = require("./middleware/auth");
+
 // API Routes
 app.use("/api/auth", authRoutes);           // Auth routes (login/signup)
 app.use("/api/turfs", turfRoutes);          // Turf routes (get/add turfs)
 app.use("/api/bookings", bookingRoutes);    // Booking routes (store bookings)
 
 // Get logged-in user by ID (for dashboard name, profile, etc.)
-app.get("/api/auth/user/:id", async (req, res) => {
+app.get("/api/auth/user/:id", authenticateUser, async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select("name email role");
     if (!user) return res.status(404).json({ msg: "User not found" });
