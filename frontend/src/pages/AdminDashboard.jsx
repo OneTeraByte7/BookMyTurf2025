@@ -10,7 +10,6 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
 
 const AdminDashboard = () => {
   const [adminName, setAdminName] = useState("");
@@ -19,17 +18,13 @@ const AdminDashboard = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      try {
-        const decoded = jwtDecode(token);
-        const userId = decoded.id;
-
-        axios
-          .get(`http://localhost:5000/api/auth/user/${userId}`)
-          .then((res) => setAdminName(res.data.name))
-          .catch((err) => console.error("Error fetching admin data", err));
-      } catch (error) {
-        console.error("Error decoding token:", error);
-      }
+      // Send the token directly to the backend to verify and fetch admin details
+      axios
+        .get("http://localhost:5000/api/auth/admin", {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((res) => setAdminName(res.data.name))
+        .catch((err) => console.error("Error fetching admin data", err));
     }
   }, []);
 
@@ -47,19 +42,34 @@ const AdminDashboard = () => {
           <p className="text-white mb-4 font-semibold">👋 Welcome, {adminName}</p>
 
           <nav className="space-y-3 text-[15px]">
-            <button className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition">
+            <button
+              onClick={() => navigate("/admin-myturf")}
+              className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition"
+            >
               <Landmark size={20} /> My Turf
             </button>
-            <button className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition">
+            <button
+              onClick={() => navigate("/admin-payment-history")}
+              className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition"
+            >
               <CreditCard size={20} /> Payment History
             </button>
-            <button className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition">
+            <button
+              onClick={() => navigate("/admin-booking-history")}
+              className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition"
+            >
               <Calendar size={20} /> Booking History
             </button>
-            <button className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition">
+            <button
+              onClick={() => navigate("/admin-host-event")}
+              className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition"
+            >
               <Home size={20} /> Host Event
             </button>
-            <button className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition">
+            <button
+              onClick={() => navigate("/admin-ai-bot")}
+              className="flex items-center gap-3 w-full text-left text-white hover:text-green-300 transition"
+            >
               <Bot size={20} /> AI Bot
             </button>
           </nav>
@@ -67,7 +77,7 @@ const AdminDashboard = () => {
 
         <div className="space-y-3">
           <button
-            onClick={() => navigate("/admin-profile")} // 🔄 Navigate to AdminProfile.jsx
+            onClick={() => navigate("/admin-profile")}
             className="flex items-center gap-3 text-blue-400 hover:text-blue-500 transition"
           >
             <User size={20} /> View Profile
