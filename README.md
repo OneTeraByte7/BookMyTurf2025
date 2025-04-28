@@ -1,13 +1,14 @@
+# 🏆BookMyTurf💻
 ![Hackron 2025](https://img.shields.io/badge/BookMyTurf-2025-blue.svg) ![Status](https://img.shields.io/badge/Status-Completed-success.svg)
 
 
-# 📖 BookMyTurf
+# 📖 Overview
 
 Welcome to **BookMyTurf** – the ultimate turf booking platform!  
 Built with the **MERN Stack** and integrated with **AI & ML**, BookMyTurf allows users to discover, book, and manage turf spaces, while admins manage turf availability and events seamlessly.
 
 ---
-
+# ✨Trophies
 [![trophy](https://github-profile-trophy.vercel.app/?username=OneTeraByte7&theme=onedark)](https://github.com/ryo-ma/github-profile-trophy)
 
 ## 📋 Table of Contents
