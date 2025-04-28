@@ -68,5 +68,50 @@ It also uses AI to optimize pricing, recommend turfs, detect occupancy, and more
    ```bash
    git clone https://github.com/yourusername/BookMyTurf.git
    cd BookMyTurf
-  ```
+   ```
+2. **Install frontend dependencies:**
+   ```bash
+   cd client
+   npm install
+   npm start
+   ```
+3. **Install backend dependencies:**
+   ```bash
+   cd server
+   npm install
+   npm run dev
+   ```
+
+## 📸 Screenshots
+
+| Feature          | Screenshot      |
+|------------------|------------------|
+| Landing Page     | *Coming Soon* |
+| User Dashboard   | *Coming Soon* |
+| Admin Dashboard  | *Coming Soon* |
+| Booking Page     | *Coming Soon* |
+
+
+## 🚀 Future Improvements
+
+- Integrate full payment gateway (Stripe, Razorpay)
+- Push notifications via Email and SMS
+- Develop a Mobile App using React Native
+- Create Admin Analytics Dashboard
+- Implement Auto-scheduling for turf maintenance
+- Add more AI features like dynamic demand prediction
+- Support multiple languages for broader user access
+- Improve accessibility (A11y) for visually impaired users
+
+
+## 🤝 Contributing
+
+Contributions are highly welcome! 🎉
+
+To contribute to **BookMyTurf**:
+1. **Fork** the repository.
+2. **Create a branch** for your feature or bug fix:
+   ```bash
+   git checkout -b feature/YourFeatureName
+   ```
 
