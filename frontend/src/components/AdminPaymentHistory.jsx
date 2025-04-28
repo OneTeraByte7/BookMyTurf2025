@@ -8,7 +8,7 @@ const PaymentHistory = () => {
   ];
 
   return (
-    <div className="h-screen bg-black text-white">
+    <div className="h-screen bg-black text-white flex">
       {/* Sidebar */}
       <aside className="w-64 bg-[#0f3813] p-6 shadow-md flex flex-col justify-between">
         <div>
@@ -44,21 +44,21 @@ const PaymentHistory = () => {
       {/* Main Content Area */}
       <main className="flex-1 p-10 bg-black text-white">
         <h2 className="text-2xl font-semibold text-green-400 mb-6">Payment History</h2>
-        <div className="mt-4 bg-[#1a1a1a] p-6 rounded-lg shadow-lg">
+        <div className="mt-4 bg-[#1a1a1a] p-6 rounded-lg shadow-lg overflow-x-auto">
           <table className="min-w-full table-auto">
             <thead>
               <tr>
-                <th className="px-4 py-2 text-green-400">Date</th>
-                <th className="px-4 py-2 text-green-400">Amount</th>
-                <th className="px-4 py-2 text-green-400">Status</th>
+                <th className="px-6 py-3 text-left text-green-400 text-sm uppercase tracking-wider">Date</th>
+                <th className="px-6 py-3 text-left text-green-400 text-sm uppercase tracking-wider">Amount</th>
+                <th className="px-6 py-3 text-left text-green-400 text-sm uppercase tracking-wider">Status</th>
               </tr>
             </thead>
             <tbody>
               {payments.map((payment, index) => (
-                <tr key={index}>
-                  <td className="px-4 py-2">{payment.date}</td>
-                  <td className="px-4 py-2">${payment.amount}</td>
-                  <td className="px-4 py-2">{payment.status}</td>
+                <tr key={index} className="border-t border-gray-700">
+                  <td className="px-6 py-4">{payment.date}</td>
+                  <td className="px-6 py-4">${payment.amount}</td>
+                  <td className="px-6 py-4">{payment.status}</td>
                 </tr>
               ))}
             </tbody>
