@@ -8,6 +8,8 @@ Built with the **MERN Stack** and integrated with **AI & ML**, BookMyTurf allows
 
 ---
 
+[![trophy](https://github-profile-trophy.vercel.app/?username=OneTeraByte7&theme=onedark)](https://github.com/ryo-ma/github-profile-trophy)
+
 ## 📋 Table of Contents
 - [About](#-about)
 - [Features](#-features)
