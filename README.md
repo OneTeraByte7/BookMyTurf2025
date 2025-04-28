@@ -91,7 +91,8 @@ It also uses AI to optimize pricing, recommend turfs, detect occupancy, and more
 
 | Feature          | Screenshot      |
 |------------------|------------------|
-| Landing Page     | *Coming Soon* |
+| Landing Page     | ![image](https://github.com/user-attachments/assets/782f7d5d-8332-4c1b-9d7d-382fd9e01e43)
+ 
 | User Dashboard   | *Coming Soon* |
 | Admin Dashboard  | *Coming Soon* |
 | Booking Page     | *Coming Soon* |
