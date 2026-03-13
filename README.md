@@ -70,23 +70,85 @@ It also uses AI to optimize pricing, recommend turfs, detect occupancy, and more
 
 ## ⚙️ Setup Instructions
 
-1. **Clone the repository:**
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB Atlas account or local MongoDB
+- npm or yarn
+
+### Backend Setup
+
+1. **Navigate to backend folder:**
    ```bash
-   git clone https://github.com/yourusername/BookMyTurf.git
-   cd BookMyTurf
+   cd backend
    ```
-2. **Install frontend dependencies:**
+
+2. **Install dependencies:**
    ```bash
-   cd client
    npm install
+   ```
+
+3. **Create `.env` file in backend folder:**
+   ```env
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret_key
+   PORT=5000
+   ```
+
+4. **Start the backend server:**
+   ```bash
    npm start
    ```
-3. **Install backend dependencies:**
-   ```bash
-   cd server
-   npm install
-   npm run dev
+
+   You should see:
    ```
+   🚀 Server running on port 5000
+   ✅ MongoDB Connected
+   ```
+
+### Frontend Setup
+
+1. **Navigate to frontend folder:**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Create `.env` file in frontend folder:**
+   ```env
+   REACT_APP_API_URL=http://localhost:5000
+   ```
+
+4. **Start the frontend:**
+   ```bash
+   npm start
+   ```
+
+   Browser will open at: `http://localhost:3000`
+
+### 🎯 Quick Test
+
+1. Go to `http://localhost:3000/signup`
+2. Create an account:
+   - Name: Test User
+   - Email: test@example.com
+   - Password: password123 (min 6 characters)
+   - Role: User or Admin
+3. Click Signup → Redirects to Login
+4. Login with same credentials
+5. You'll be redirected to your dashboard!
+
+### 📚 Documentation
+
+- **Backend API**: See `backend/API_DOCUMENTATION.md`
+- **Backend Fixes**: See `backend/FIXES_SUMMARY.md`
+- **Frontend Fixes**: See `frontend/FRONTEND_FIXES.md`
+- **Complete Guide**: See `COMPLETE_FIX_SUMMARY.md`
+
+---
 
 ## 📸 Screenshots
 
