@@ -9,7 +9,7 @@ npm install
 ## Step 2: Configure Environment
 Create a `.env` file in the backend folder:
 ```env
-MONGO_URI=mongodb+srv://suryawanshisoham7:Soham%401505@linkedin.sgr62ki.mongodb.net/?retryWrites=true&w=majority&appName=LinkedIn
+MONGO_URI=""
 JWT_SECRET=b101d42eb1f52d04cd5fdcb63badca9a4f2a604babdd96085523e15cac8b2aaa
 PORT=5000
 ```
