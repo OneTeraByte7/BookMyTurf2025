@@ -8,6 +8,7 @@
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.8.4",
+    "framer-motion": "^12.36.0",
     "frontend": "file:",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.487.0",
