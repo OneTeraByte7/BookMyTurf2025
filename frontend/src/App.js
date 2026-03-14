@@ -20,7 +20,11 @@ import AdminProfile from "./components/AdminProfile";
 import MyTurf from "./components/AdminMyTurf";
 import AdminPaymentHistory from "./components/AdminPaymentHistory";
 import HostEvents from "./components/AdminHostEvent"; 
-import AdminBookingHistory from "./components/AdminBookingHistory"; 
+import AdminBookingHistory from "./components/AdminBookingHistory";
+
+// Layouts
+import UserLayout from "./components/UserLayout";
+import AdminLayout from "./components/AdminLayout"; 
 
 function App() {
   return (
@@ -35,22 +39,22 @@ function App() {
 
         {/* User Dashboard & Routes */}
         <Route path="/user-dashboard" element={<UserDashboard />} />
-        <Route path="/user-book-turf" element={<BookTurf />} />
-        <Route path="/user-payment" element={<Payment />} />
-        <Route path="/user-events" element={<EventManager />} />
-        <Route path="/user-ai-bot" element={<AIBot />} />
-        <Route path="/user-past-bookings" element={<PastBookings />} />
-        <Route path="/user-random-events" element={<RandomEvents />} /> {/* Corrected duplicate route */}
+        <Route path="/user-book-turf" element={<UserLayout><BookTurf /></UserLayout>} />
+        <Route path="/user-payment" element={<UserLayout><Payment /></UserLayout>} />
+        <Route path="/user-events" element={<UserLayout><EventManager /></UserLayout>} />
+        <Route path="/user-ai-bot" element={<UserLayout><AIBot /></UserLayout>} />
+        <Route path="/user-past-bookings" element={<UserLayout><PastBookings /></UserLayout>} />
+        <Route path="/user-random-events" element={<UserLayout><RandomEvents /></UserLayout>} /> {/* Corrected duplicate route */}
 
         {/* Admin Dashboard & Routes */}
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/admin-profile" element={<AdminProfile />} />
-        <Route path="/admin-myturf" element={<MyTurf />} /> {/* Cleaned route */}
-        <Route path="/admin-payment-history" element={<AdminPaymentHistory />} />
-        <Route path="/admin-booking-history" element={<AdminBookingHistory />} />
-        <Route path="/admin-host-event" element={<HostEvents />} />
+        <Route path="/admin-profile" element={<AdminLayout><AdminProfile /></AdminLayout>} />
+        <Route path="/admin-myturf" element={<AdminLayout><MyTurf /></AdminLayout>} /> {/* Cleaned route */}
+        <Route path="/admin-payment-history" element={<AdminLayout><AdminPaymentHistory /></AdminLayout>} />
+        <Route path="/admin-booking-history" element={<AdminLayout><AdminBookingHistory /></AdminLayout>} />
+        <Route path="/admin-host-event" element={<AdminLayout><HostEvents /></AdminLayout>} />
 
-        <Route path="/admin-ai-bot" element={<AIBot />} />
+        <Route path="/admin-ai-bot" element={<AdminLayout><AIBot /></AdminLayout>} />
 
         {/* Fallback Route */}
         <Route path="*" element={<Navigate to="/" />} />
