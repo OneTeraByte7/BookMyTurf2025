@@ -126,4 +126,49 @@ router.delete("/:id", authenticateUser, async (req, res) => {
   }
 });
 
+// Test auth endpoint
+router.get("/test-auth", authenticateUser, (req, res) => {
+  res.json({ 
+    msg: "Auth working!", 
+    user: req.user 
+  });
+});
+
+// POST register new turf (admin only)
+router.post("/register", authenticateUser, async (req, res) => {
+  console.log("📥 Register turf request - User:", req.user);
+  console.log("📥 Request body:", req.body);
+  
+  try {
+    if (req.user.role !== "admin") {
+      console.log("❌ User is not admin:", req.user.role);
+      return res.status(403).json({ msg: "Access denied. Admin only." });
+    }
+
+    const { turfName, location, pricePerHour, contactNumber, facilities, description, imageUrl } = req.body;
+
+    if (!turfName || !location || !pricePerHour || !contactNumber) {
+      console.log("❌ Missing required fields");
+      return res.status(400).json({ msg: "Please provide all required fields" });
+    }
+
+    const newTurf = new Turf({
+      turfName,
+      location,
+      pricePerHour,
+      contactNumber,
+      facilities: Array.isArray(facilities) ? facilities : facilities ? [facilities] : [],
+      description,
+      imageUrl,
+    });
+
+    await newTurf.save();
+    console.log("✅ Turf registered successfully:", newTurf.turfName);
+    res.status(201).json({ msg: "Turf registered successfully", turf: newTurf });
+  } catch (err) {
+    console.error("❌ Error registering turf:", err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
 module.exports = router;
