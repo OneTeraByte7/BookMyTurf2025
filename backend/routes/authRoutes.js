@@ -203,4 +203,48 @@ router.get("/me", async (req, res) => {
   }
 });
 
+// Get User by ID
+router.get("/user/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password");
+    
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error("Get user by ID error:", err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+// Get Admin Info (Protected Route)
+router.get("/admin", async (req, res) => {
+  try {
+    const token = req.header("Authorization")?.replace("Bearer ", "");
+    
+    if (!token) {
+      return res.status(401).json({ msg: "No token, authorization denied" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    if (decoded.role !== "admin") {
+      return res.status(403).json({ msg: "Access denied. Admin only." });
+    }
+
+    const user = await User.findById(decoded.id).select("-password");
+    
+    if (!user) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error("Get admin error:", err);
+    res.status(401).json({ msg: "Token is not valid" });
+  }
+});
+
 module.exports = router;
