@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { CreditCard, Smartphone, IndianRupee, Calendar, Clock, Zap } from "lucide-react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PaymentPage = () => {
   const [selectedMethod, setSelectedMethod] = useState(null);
@@ -36,6 +36,8 @@ const PaymentPage = () => {
       fetchLatestBooking();
     }
   }, [location]);
+
+  const navigate = useNavigate();
 
   const paymentMethods = [
     { name: "Google Pay", icon: Smartphone },
@@ -142,7 +144,37 @@ const PaymentPage = () => {
             </motion.div>
           )}
 
-          <button className="w-full py-4 bg-turf-blue text-black font-heading text-xl uppercase tracking-wider rounded-xl hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all flex justify-center items-center gap-2 hover:scale-[1.02] active:scale-[0.98]">
+          <button
+            onClick={async () => {
+              try {
+                const token = localStorage.getItem('token');
+                let userId = bookingData.userId || null;
+                if (!userId && token) {
+                  try { userId = jwtDecode(token).id; } catch (e) { }
+                }
+
+                const payload = {
+                  bookingId: bookingData._id,
+                  userId,
+                  amount: Number(bookingData.totalPrice) || 0,
+                  method: selectedMethod ? selectedMethod.toLowerCase() : 'card',
+                  status: 'success',
+                };
+
+                const res = await axios.post('http://localhost:5000/api/payments', payload, {
+                  headers: token ? { Authorization: `Bearer ${token}` } : {}
+                });
+
+                console.log('Payment recorded:', res.data);
+                // Navigate to user's bookings or show confirmation
+                navigate('/user-dashboard');
+              } catch (err) {
+                console.error('Payment error:', err);
+                alert('Payment failed. Please try again.');
+              }
+            }}
+            className="w-full py-4 bg-turf-blue text-black font-heading text-xl uppercase tracking-wider rounded-xl hover:shadow-[0_0_20px_rgba(0,212,255,0.4)] transition-all flex justify-center items-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
+          >
             <Zap size={20} /> Authorize Payment
           </button>
         </motion.div>
