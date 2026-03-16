@@ -12,6 +12,7 @@ const authRoutes = require("./routes/authRoutes");
 const turfRoutes = require("./routes/turfRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const eventRoutes = require("./routes/eventRoutes");
+const paymentRoutes = require("./routes/paymentRoutes");
 
 // Middleware
 app.use(express.json({ limit: '10mb' }));
@@ -33,12 +34,14 @@ app.use("/api/auth", authRoutes);
 app.use("/api/turfs", turfRoutes);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/payments", paymentRoutes);
 
 console.log("✅ Routes registered:");
 console.log("   - /api/auth");
 console.log("   - /api/turfs");
 console.log("   - /api/bookings");
 console.log("   - /api/events");
+console.log("   - /api/payments");
 
 // Health Check
 app.get("/", (req, res) => {
