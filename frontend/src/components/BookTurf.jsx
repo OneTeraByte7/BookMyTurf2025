@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { MapPin, Phone, IndianRupee, Info, Clock, Calendar as CalendarIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 const BookTurf = () => {
   const [turfs, setTurfs] = useState([]);
   const [bookingData, setBookingData] = useState({});
   const [bookedTurfs, setBookedTurfs] = useState(new Set()); // Track booked turfs
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/turfs")
@@ -26,14 +29,28 @@ const BookTurf = () => {
 
   const handleBookNow = async (turfId) => {
     try {
+      const token = localStorage.getItem("token");
+      let userId = null;
+      if (token) {
+        try { userId = jwtDecode(token).id; } catch (e) { /* ignore */ }
+      }
+
       const response = await axios.post('http://localhost:5000/api/bookings', {
         turfId: turfId,
         date: bookingData[turfId]?.date,
         timeSlot: bookingData[turfId]?.timeSlot,
+        userId: userId,
+      }, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {}
       });
 
-      console.log("Booking successful:", response.data);
+      console.log("Booking created:", response.data);
       setBookedTurfs((prev) => new Set(prev).add(turfId));
+
+      // If booking returned, navigate to payment page to complete payment
+      if (response.data.booking) {
+        navigate('/payment', { state: { booking: response.data.booking } });
+      }
     } catch (error) {
       console.error("Booking error:", error);
     }
