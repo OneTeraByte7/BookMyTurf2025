@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { motion } from 'framer-motion';
 import { Home, Calendar, Clock, AlignLeft, Send, CheckCircle } from 'lucide-react';
 
@@ -19,14 +20,22 @@ const HostEvent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Event Details:', eventDetails);
+    const token = localStorage.getItem('token');
+    const submitEvent = async () => {
+      try {
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        const res = await axios.post('http://localhost:5000/api/events', eventDetails, { headers });
+        console.log('Event created:', res.data);
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 3000);
+        setEventDetails({ eventName: '', eventDate: '', eventTime: '', eventDescription: '' });
+      } catch (err) {
+        console.error('Error creating event:', err.response?.data || err.message);
+        alert('Failed to create event. Make sure you are logged in.');
+      }
+    };
 
-    // Simulate submission
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setEventDetails({ eventName: '', eventDate: '', eventTime: '', eventDescription: '' });
-    }, 3000);
+    submitEvent();
   };
 
   return (
