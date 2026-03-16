@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Booking = require("../models/Booking");
 const Turf = require("../models/turf");
+const Payment = require("../models/Payment");
 const authenticateUser = require("../middleware/auth");
 
 // Create Booking (with optional authentication)
@@ -34,10 +35,39 @@ router.post("/", async (req, res) => {
       date,
       timeSlot,
       totalPrice,
-      status: "confirmed",
+      status: "pending",
     });
 
     await newBooking.save();
+
+    // If client supplied payment info, persist it and update booking status on success
+    if (req.body.payment) {
+      try {
+        const { amount, method, status, providerResponse } = req.body.payment;
+        const paymentRecord = new Payment({
+          bookingId: newBooking._id,
+          userId: userId || null,
+          amount: typeof amount === 'number' ? amount : totalPrice,
+          method: method || 'card',
+          status: status || 'pending',
+          providerResponse: providerResponse || {},
+        });
+
+        await paymentRecord.save();
+
+        if (paymentRecord.status === 'success') {
+          newBooking.status = 'confirmed';
+          await newBooking.save();
+        }
+
+        console.log("Booking and payment saved:", newBooking, paymentRecord);
+        return res.status(201).json({ msg: "Booking created", booking: newBooking, payment: paymentRecord });
+      } catch (pErr) {
+        console.error("Error saving payment:", pErr);
+        // still return booking saved but indicate payment error
+        return res.status(201).json({ msg: "Booking created (payment failed)", booking: newBooking });
+      }
+    }
 
     console.log("Booking saved:", newBooking);
     res.status(201).json({ 
