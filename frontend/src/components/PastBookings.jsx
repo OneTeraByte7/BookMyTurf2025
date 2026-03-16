@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { History, CalendarCheck, Clock } from "lucide-react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
 
 const PastBookings = () => {
   const [bookings, setBookings] = useState([]);
