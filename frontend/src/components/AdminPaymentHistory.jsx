@@ -11,10 +11,9 @@ const PaymentHistory = () => {
     const fetchPayments = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get("http://localhost:5000/api/bookings", {
+        const response = await axios.get("http://localhost:5000/api/payments", {
           headers: { Authorization: `Bearer ${token}` }
         });
-        // Use bookings as payment records
         setPayments(response.data);
       } catch (error) {
         console.error("Error fetching payments:", error);
@@ -97,10 +96,10 @@ const PaymentHistory = () => {
                     className="border-b border-white/5 hover:bg-white/5 transition-colors group/row"
                   >
                     <td className="py-5 px-6 font-sans text-white/80 flex items-center gap-3">
-                      <Calendar size={16} className="text-turf-blue/50 group-hover/row:text-turf-blue transition-colors" /> {new Date(payment.date).toLocaleDateString()}
+                      <Calendar size={16} className="text-turf-blue/50 group-hover/row:text-turf-blue transition-colors" /> {new Date(payment.createdAt).toLocaleDateString()}
                     </td>
                     <td className="py-5 px-6 font-sans text-white/80">
-                      {payment.turfId?.turfName || 'Unknown'}
+                      {payment.bookingId?.turfId?.turfName || payment.bookingId?.turfName || 'Unknown'}
                     </td>
                     <td className="py-5 px-6 font-sans text-white/80">
                       {payment.userId?.name || 'Guest'}
@@ -108,11 +107,11 @@ const PaymentHistory = () => {
                     <td className="py-5 px-6 font-sans">
                       <div className="flex items-center gap-1">
                         <IndianRupee size={16} className="text-turf-neon" />
-                        <span className="text-white text-lg font-bold">{payment.totalPrice}</span>
+                        <span className="text-white text-lg font-bold">{payment.amount}</span>
                       </div>
                     </td>
                     <td className="py-5 px-6">
-                      <span className={`px-3 py-1 text-xs font-bold uppercase tracking-widest rounded-full border ${payment.status === 'confirmed' || payment.status === 'completed'
+                      <span className={`px-3 py-1 text-xs font-bold uppercase tracking-widest rounded-full border ${payment.status === 'success' || payment.status === 'completed' || payment.status === 'confirmed'
                           ? 'bg-turf-neon/10 border-turf-neon/30 text-turf-neon shadow-[0_0_10px_rgba(204,255,0,0.2)]'
                           : 'bg-turf-alert/10 border-turf-alert/30 text-turf-alert shadow-[0_0_10px_rgba(255,51,102,0.2)]'
                         }`}>
