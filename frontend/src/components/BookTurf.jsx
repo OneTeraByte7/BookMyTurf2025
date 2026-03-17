@@ -3,7 +3,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { MapPin, Phone, IndianRupee, Info, Clock, Calendar as CalendarIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 const BookTurf = () => {
   const [turfs, setTurfs] = useState([]);
