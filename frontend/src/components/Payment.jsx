@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { CreditCard, Smartphone, IndianRupee, Calendar, Clock, Zap } from "lucide-react";
 import axios from "axios";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const PaymentPage = () => {
