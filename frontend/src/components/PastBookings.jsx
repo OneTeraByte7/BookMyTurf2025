@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { History, CalendarCheck, Clock } from "lucide-react";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 const PastBookings = () => {
   const [bookings, setBookings] = useState([]);
