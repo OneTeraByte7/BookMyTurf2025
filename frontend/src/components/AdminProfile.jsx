@@ -46,9 +46,7 @@ const AdminProfile = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-turf-space text-white p-4 py-12 relative overflow-hidden">
-      {/* Background Orbs */}
-      <div className="absolute top-[20%] left-[-10%] w-[400px] h-[400px] bg-turf-alert/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <div className="p-4 md:p-8 bg-transparent">
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -179,8 +177,8 @@ const AdminProfile = () => {
             type="submit"
             disabled={loading}
             className={`w-full py-4 mt-4 font-heading text-xl uppercase tracking-wider rounded-xl transition-all duration-300 flex justify-center items-center gap-2 ${loading
-                ? "bg-turf-alert/50 text-white/50 cursor-not-allowed"
-                : "bg-turf-alert text-white hover:shadow-[0_0_20px_rgba(255,51,102,0.4)] hover:scale-[1.02] active:scale-[0.98]"
+              ? "bg-turf-alert/50 text-white/50 cursor-not-allowed"
+              : "bg-turf-alert text-white hover:shadow-[0_0_20px_rgba(255,51,102,0.4)] hover:scale-[1.02] active:scale-[0.98]"
               }`}
           >
             {loading ? "Authorizing..." : <><CheckCircle size={20} /> Register Turf</>}
