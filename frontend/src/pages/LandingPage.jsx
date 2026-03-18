@@ -24,7 +24,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="bg-turf-dark text-white min-h-screen flex flex-col items-center overflow-hidden relative">
+    <div className="bg-turf-dark text-white min-h-screen flex flex-col items-center relative">
       {/* Background Ambience */}
       <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-turf-neon/10 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-turf-blue/10 rounded-full blur-[120px] pointer-events-none"></div>
