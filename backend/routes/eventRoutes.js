@@ -6,7 +6,7 @@ const authenticateUser = require("../middleware/auth");
 // Create New Event (Protected)
 router.post("/", authenticateUser, async (req, res) => {
   try {
-    const { eventName, eventDate, eventTime, eventDescription } = req.body;
+    const { eventName, eventDate, eventTime, eventDescription, turfName } = req.body;
 
     if (!eventName || !eventDate || !eventTime || !eventDescription) {
       return res.status(400).json({ msg: "Please fill all fields" });
@@ -17,6 +17,7 @@ router.post("/", authenticateUser, async (req, res) => {
       eventDate,
       eventTime,
       eventDescription,
+      turfName: turfName || "",
       createdBy: req.user.id,
     });
 
@@ -46,11 +47,11 @@ router.get("/:id", async (req, res) => {
   try {
     const event = await Event.findById(req.params.id)
       .populate("createdBy", "name email");
-    
+
     if (!event) {
       return res.status(404).json({ msg: "Event not found" });
     }
-    
+
     res.json(event);
   } catch (error) {
     console.error("Error fetching event:", error);
@@ -74,7 +75,7 @@ router.get("/user/:userId", async (req, res) => {
 router.put("/:id", authenticateUser, async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
-    
+
     if (!event) {
       return res.status(404).json({ msg: "Event not found" });
     }
@@ -101,7 +102,7 @@ router.put("/:id", authenticateUser, async (req, res) => {
 router.delete("/:id", authenticateUser, async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
-    
+
     if (!event) {
       return res.status(404).json({ msg: "Event not found" });
     }
