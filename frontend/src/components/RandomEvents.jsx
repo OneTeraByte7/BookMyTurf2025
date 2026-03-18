@@ -33,14 +33,14 @@ const RandomEvents = () => {
   };
 
   return (
-    <div className="p-4 md:p-8 bg-transparent min-h-full">
+    <div className="p-4 md:p-6 bg-transparent min-h-full">
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        className="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-6"
+        className="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4"
       >
         <div>
-          <h1 className="text-4xl md:text-5xl font-heading text-white uppercase tracking-wider mb-2">
+          <h1 className="text-3xl md:text-4xl font-heading text-white uppercase tracking-wider mb-2">
             OPEN <span className="text-turf-alert">COMBINES</span>
           </h1>
           <p className="text-white/50 font-sans text-lg">Discover exclusive public events and challenges.</p>
@@ -84,15 +84,15 @@ const RandomEvents = () => {
                 <h3 className="text-2xl font-heading text-white tracking-wide uppercase mb-3 drop-shadow-md group-hover:text-turf-alert transition-colors">{event.eventName}</h3>
 
                 <p className="text-white/70 font-sans text-sm mb-6 leading-relaxed">
-                  {event.description}
+                  {event.eventDescription}
                 </p>
 
                 <div className="space-y-3 font-sans text-sm text-white/60 bg-black/40 p-4 rounded-2xl border border-white/5">
                   <div className="flex items-center gap-3">
-                    <MapPin className="text-turf-blue" size={16} /> <span className="text-white">{event.turfName}</span>
+                    <MapPin className="text-turf-blue" size={16} /> <span className="text-white">{event.turfName || "BookMyTurf"}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <CalendarIcon className="text-turf-neon" size={16} /> <span>{event.date}</span>
+                    <CalendarIcon className="text-turf-neon" size={16} /> <span>{event.eventDate}</span>
                   </div>
                 </div>
               </div>
