@@ -49,7 +49,7 @@ const BookTurf = () => {
 
       // If booking returned, navigate to payment page to complete payment
       if (response.data.booking) {
-        navigate('/payment', { state: { booking: response.data.booking } });
+        navigate('/user-payment', { state: { booking: response.data.booking } });
       }
     } catch (error) {
       console.error("Booking error:", error);
@@ -77,13 +77,13 @@ const BookTurf = () => {
   };
 
   return (
-    <div className="p-4 md:p-8 bg-transparent min-h-full">
+    <div className="p-4 md:p-6 bg-transparent min-h-full">
       <motion.div
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        className="mb-10"
+        className="mb-8"
       >
-        <h1 className="text-4xl md:text-5xl font-heading text-white uppercase tracking-wider mb-2">
+        <h1 className="text-3xl md:text-4xl font-heading text-white uppercase tracking-wider mb-2">
           DOMINATE <span className="text-turf-neon neon-text-glow">THE TURF</span>
         </h1>
         <p className="text-white/50 font-sans text-lg">Select your battleground and book your slot.</p>
@@ -185,8 +185,8 @@ const BookTurf = () => {
                 <button
                   onClick={() => handleBookNow(turf._id)}
                   className={`w-full py-4 font-heading text-xl md:text-2xl uppercase tracking-wider rounded-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] ${isBooked
-                      ? 'bg-turf-alert/20 border-2 border-turf-alert/50 text-turf-alert/50 cursor-not-allowed'
-                      : 'bg-turf-neon/10 border-2 border-turf-neon text-turf-neon hover:bg-turf-neon hover:text-black hover:shadow-[0_0_20px_rgba(204,255,0,0.4)]'
+                    ? 'bg-turf-alert/20 border-2 border-turf-alert/50 text-turf-alert/50 cursor-not-allowed'
+                    : 'bg-turf-neon/10 border-2 border-turf-neon text-turf-neon hover:bg-turf-neon hover:text-black hover:shadow-[0_0_20px_rgba(204,255,0,0.4)]'
                     }`}
                   disabled={isBooked}
                 >
