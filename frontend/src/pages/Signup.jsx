@@ -62,7 +62,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-turf-dark text-white relative overflow-hidden py-12">
+    <div className="flex justify-center items-center min-h-screen bg-turf-dark text-white relative overflow-x-hidden py-12">
       {/* Background Ambience */}
       <div className="absolute top-[10%] left-[-10%] w-[500px] h-[500px] bg-turf-blue/10 rounded-full blur-[120px] pointer-events-none"></div>
       <div className="absolute bottom-[10%] right-[-10%] w-[400px] h-[400px] bg-turf-neon/10 rounded-full blur-[100px] pointer-events-none"></div>
