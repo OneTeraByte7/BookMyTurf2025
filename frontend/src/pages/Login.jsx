@@ -42,7 +42,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-turf-dark text-white relative overflow-hidden">
+    <div className="flex justify-center items-center min-h-screen bg-turf-dark text-white relative overflow-x-hidden py-8">
       {/* Background Ambience */}
       <div className="absolute top-[-10%] left-[-10%] w-[400px] h-[400px] bg-turf-neon/10 rounded-full blur-[100px] pointer-events-none"></div>
       <div className="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-turf-blue/10 rounded-full blur-[120px] pointer-events-none"></div>
@@ -108,8 +108,8 @@ const Login = () => {
             type="submit"
             disabled={loading}
             className={`w-full py-4 mt-4 font-heading text-xl uppercase tracking-wider rounded-xl transition-all duration-300 flex justify-center items-center gap-2 ${loading
-                ? "bg-turf-neon/50 text-black/50 cursor-not-allowed"
-                : "bg-turf-neon text-black hover:shadow-[0_0_20px_rgba(204,255,0,0.4)] hover:scale-[1.02] active:scale-[0.98]"
+              ? "bg-turf-neon/50 text-black/50 cursor-not-allowed"
+              : "bg-turf-neon text-black hover:shadow-[0_0_20px_rgba(204,255,0,0.4)] hover:scale-[1.02] active:scale-[0.98]"
               }`}
           >
             {loading ? "Warming up..." : <><LogIn size={20} /> Login</>}
