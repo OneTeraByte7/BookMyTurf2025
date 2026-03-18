@@ -132,7 +132,7 @@ const AdminLayout = ({ children }) => {
       </motion.aside>
 
       {/* Main Content Area */}
-      <main className="flex-1 h-full rounded-3xl bg-black/20 border border-white/5 backdrop-blur-md p-8 lg:p-12 relative z-10 overflow-y-auto custom-scroll">
+      <main className="flex-1 h-full rounded-3xl bg-black/20 border border-white/5 backdrop-blur-md p-4 lg:p-6 relative z-10 overflow-y-auto custom-scroll">
         {children}
       </main>
     </div>
